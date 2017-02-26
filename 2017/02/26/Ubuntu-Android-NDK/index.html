@@ -7,36 +7,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Ubuntu下设置环境变量的几种方法和区别 | Koudle&#39;s</title>
+  <title>Android在Ubuntu上配置NDK的环境 | Koudle&#39;s</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Ubuntu," />
+    <meta name="keywords" content="Ubuntu,Android," />
   
 
-  <meta name="description" content="在Ubuntu下设置环境变量的方法总是搞混，今天写下来可以以后多看看。
-1.通过文件设置Ubuntu环境变量首先是设置全局环境变量，对所有用户都会生效：
-
-etc/profile: 此文件为系统的每个用户设置环境信息。当用户登录时，该文件被执行一次，并从 /etc/profile.d 目录的配置文件中搜集shell 的设置。一般用于设置所有用户使用的全局变量。
-/etc/bashrc: 当 ba">
+  <meta name="description" content="由于自己一直在使用Ubuntu，所以Android的开发环境也在Ubuntu上搭建，在开发过程中，需要用到Android的交叉编译，所以把Android在Ubuntu上配置NDK环境的步骤记录一下。
+1.下载Android NDK压缩包官网下载NDK有不同的版本，这里根据需要下载不同的版本。
+2.解压把第1部下载的压缩包解压，我这里存放的目录如下：1/home/kl/android-sdk-lin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu下设置环境变量的几种方法和区别">
-<meta property="og:url" content="http://yoursite.com/2017/02/26/Ubuntun-set-environment/index.html">
+<meta property="og:title" content="Android在Ubuntu上配置NDK的环境">
+<meta property="og:url" content="http://yoursite.com/2017/02/26/Ubuntu-Android-NDK/index.html">
 <meta property="og:site_name" content="Koudle's">
-<meta property="og:description" content="在Ubuntu下设置环境变量的方法总是搞混，今天写下来可以以后多看看。
-1.通过文件设置Ubuntu环境变量首先是设置全局环境变量，对所有用户都会生效：
-
-etc/profile: 此文件为系统的每个用户设置环境信息。当用户登录时，该文件被执行一次，并从 /etc/profile.d 目录的配置文件中搜集shell 的设置。一般用于设置所有用户使用的全局变量。
-/etc/bashrc: 当 ba">
-<meta property="og:updated_time" content="2017-02-26T08:38:02.343Z">
+<meta property="og:description" content="由于自己一直在使用Ubuntu，所以Android的开发环境也在Ubuntu上搭建，在开发过程中，需要用到Android的交叉编译，所以把Android在Ubuntu上配置NDK环境的步骤记录一下。
+1.下载Android NDK压缩包官网下载NDK有不同的版本，这里根据需要下载不同的版本。
+2.解压把第1部下载的压缩包解压，我这里存放的目录如下：1/home/kl/android-sdk-lin">
+<meta property="og:updated_time" content="2017-02-26T09:11:22.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu下设置环境变量的几种方法和区别">
-<meta name="twitter:description" content="在Ubuntu下设置环境变量的方法总是搞混，今天写下来可以以后多看看。
-1.通过文件设置Ubuntu环境变量首先是设置全局环境变量，对所有用户都会生效：
-
-etc/profile: 此文件为系统的每个用户设置环境信息。当用户登录时，该文件被执行一次，并从 /etc/profile.d 目录的配置文件中搜集shell 的设置。一般用于设置所有用户使用的全局变量。
-/etc/bashrc: 当 ba">
+<meta name="twitter:title" content="Android在Ubuntu上配置NDK的环境">
+<meta name="twitter:description" content="由于自己一直在使用Ubuntu，所以Android的开发环境也在Ubuntu上搭建，在开发过程中，需要用到Android的交叉编译，所以把Android在Ubuntu上配置NDK环境的步骤记录一下。
+1.下载Android NDK压缩包官网下载NDK有不同的版本，这里根据需要下载不同的版本。
+2.解压把第1部下载的压缩包解压，我这里存放的目录如下：1/home/kl/android-sdk-lin">
 
   
 
@@ -162,15 +156,15 @@ etc/profile: 此文件为系统的每个用户设置环境信息。当用户登�
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-通过文件设置Ubuntu环境变量"><span class="toc-text">1.通过文件设置Ubuntu环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-通过-Shell-命令-export-修改-Linux-环境变量"><span class="toc-text">2.通过 Shell 命令 export 修改 Linux 环境变量</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-下载Android-NDK压缩包"><span class="toc-text">1.下载Android NDK压缩包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-解压"><span class="toc-text">2.解压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-设置环境变量"><span class="toc-text">3. 设置环境变量</span></a></li></ol>
   </div>
 
 
 
 <div class="content content-post CENTER">
-   <article id="post-Ubuntun-set-environment" class="article article-type-post" itemprop="blogPost">
+   <article id="post-Ubuntu-Android-NDK" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
-    <h1 class="post-title">Ubuntu下设置环境变量的几种方法和区别</h1>
+    <h1 class="post-title">Android在Ubuntu上配置NDK的环境</h1>
 
     <div class="article-meta">
       <span>
@@ -188,7 +182,7 @@ etc/profile: 此文件为系统的每个用户设置环境信息。当用户登�
       
   <span class="article-category">
     <i class="icon-list"></i>
-    <a class="article-category-link" href="/categories/Ubuntu/">Ubuntu</a>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
   </span>
 
 
@@ -196,7 +190,7 @@ etc/profile: 此文件为系统的每个用户设置环境信息。当用户登�
       
         <span>
           <i class="icon-comment"></i>
-          <a href="https://koudle.github.io//2017/02/26/Ubuntun-set-environment/#disqus_thread"></a>
+          <a href="https://koudle.github.io//2017/02/26/Ubuntu-Android-NDK/#disqus_thread"></a>
         </span>
       
 
@@ -215,24 +209,12 @@ etc/profile: 此文件为系统的每个用户设置环境信息。当用户登�
 
   <div class="article-content">
     
-      <p> 在Ubuntu下设置环境变量的方法总是搞混，今天写下来可以以后多看看。</p>
-<h2 id="1-通过文件设置Ubuntu环境变量"><a href="#1-通过文件设置Ubuntu环境变量" class="headerlink" title="1.通过文件设置Ubuntu环境变量"></a>1.通过文件设置Ubuntu环境变量</h2><p>首先是设置全局环境变量，对所有用户都会生效：</p>
-<ul>
-<li>etc/profile: 此文件为系统的每个用户设置环境信息。当用户登录时，该文件被执行一次，并从 /etc/profile.d 目录的配置文件中搜集shell 的设置。一般用于设置所有用户使用的全局变量。</li>
-<li>/etc/bashrc: 当 bash shell 被打开时，该文件被读取。也就是说，每次新打开一个终端 shell，该文件就会被读取。</li>
-</ul>
-<p>接着是与上述两个文件对应，但只对单个用户生效：</p>
-<ul>
-<li>~/.bash_profile 或 ~/.profile: 只对单个用户生效，当用户登录时该文件仅执行一次。用户可使用该文件添加自己使用的 shell 变量信息。另外在不同的LINUX操作系统下，这个文件可能是不同的，可能是 ~/.bash_profile， ~/.bash_login 或 ~/.profile 其中的一种或几种，如果存在几种的话，那么执行的顺序便是：~/.bash_profile、 ~/.bash_login、 ~/.profile。比如 Ubuntu 系统一般是 ~/.profile 文件。</li>
-<li>~/.bashrc: 只对单个用户生效，当登录以及每次打开新的 shell 时，该文件被读取。</li>
-</ul>
-<p>此外，修改 /etc/environment 这个文件也能实现环境变量的设置。/etc/environment 设置的也是全局变量，从文件本身的作用上来说， /etc/environment 设置的是整个系统的环境，而/etc/profile是设置所有用户的环境。有几点需注意：</p>
-<ul>
-<li>系统先读取 etc/enviornmen 再读取 /etc/profile（还是反过来？）</li>
-<li>/etc/environment 中不能包含命令，即直接通过 VAR=”…” 的方式设置，不使用 export 。</li>
-<li>使用 source /etc/environment 可以使变量设置在当前窗口立即生效，需注销/重启之后，才能对每个新终端窗口都生效。</li>
-</ul>
-<h2 id="2-通过-Shell-命令-export-修改-Linux-环境变量"><a href="#2-通过-Shell-命令-export-修改-Linux-环境变量" class="headerlink" title="2.通过 Shell 命令 export 修改 Linux 环境变量"></a>2.通过 Shell 命令 export 修改 Linux 环境变量</h2><p>另一种修改 Linux 环境变量的方式就是通过 Shell 命令 export，注意变量名不要有美元号 $，赋值语句中才需要有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ export PATH=$PATH:/usr/local/hadoop/bin</div><div class="line"></div><div class="line">export 方式只对当前终端 Shell 有效</div><div class="line">使用 export 设置的变量，只对当前终端 Shell 有效，也就是说如果新打开一个终端，那这个 export 设置的变量在新终端中使无法读取到的。适合设置一些临时变量。</div></pre></td></tr></table></figure></p>
+      <p>由于自己一直在使用Ubuntu，所以Android的开发环境也在Ubuntu上搭建，在开发过程中，需要用到Android的交叉编译，所以把Android在Ubuntu上配置NDK环境的步骤记录一下。</p>
+<h2 id="1-下载Android-NDK压缩包"><a href="#1-下载Android-NDK压缩包" class="headerlink" title="1.下载Android NDK压缩包"></a>1.下载Android NDK压缩包</h2><p><a href="https://developer.android.com/ndk/downloads/index.html" target="_blank" rel="external">官网下载</a><br>NDK有不同的版本，这里根据需要下载不同的版本。</p>
+<h2 id="2-解压"><a href="#2-解压" class="headerlink" title="2.解压"></a>2.解压</h2><p>把第1部下载的压缩包解压，我这里存放的目录如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/home/kl/android-sdk-linux/android-nkd-r13b</div></pre></td></tr></table></figure></p>
+<h2 id="3-设置环境变量"><a href="#3-设置环境变量" class="headerlink" title="3. 设置环境变量"></a>3. 设置环境变量</h2><p>执行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo vim ~/.bashrc</div></pre></td></tr></table></figure></p>
+<p>然后经如下几句加进去：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export ANDROID_HOME=&quot;/home/kl/android-sdk-linux&quot;</div><div class="line">export PATH=&quot;$PATH:$ANDROID_NDK&quot;</div></pre></td></tr></table></figure></p>
+<p>关闭terminal，在打开就设置成功了，在验证一下是否成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ ndk-build -v</div><div class="line">GNU Make 3.81</div><div class="line">Copyright (C) 2006  Free Software Foundation, Inc.</div><div class="line">This is free software; see the source for copying conditions.</div><div class="line">There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A</div><div class="line">PARTICULAR PURPOSE.</div><div class="line"></div><div class="line">This program built for x86_64-pc-linux-gnu</div></pre></td></tr></table></figure></p>
 
     
   </div>
@@ -243,10 +225,10 @@ etc/profile: 此文件为系统的每个用户设置环境信息。当用户登�
 
    
   <div class="box-prev-next clearfix">
-    <a class="show pull-left" href="/2017/02/26/TensorFlow/">
+    <a class="show pull-left" href="/2017/02/26/Ubuntun-set-environment/">
         <i class="icon icon-angle-left"></i>
     </a>
-    <a class="show pull-right" href="/2017/02/26/Ubuntu-Android-NDK/">
+    <a class="hide pull-right" href="/">
         <i class="icon icon-angle-right"></i>
     </a>
   </div>
@@ -338,7 +320,7 @@ etc/profile: 此文件为系统的每个用户设置环境信息。当用户登�
   <script>
     var disqus_shortname = 'koudle';
     
-    var disqus_url = 'http://yoursite.com/2017/02/26/Ubuntun-set-environment/';
+    var disqus_url = 'http://yoursite.com/2017/02/26/Ubuntu-Android-NDK/';
     
     (function(){
       var dsq = document.createElement('script');
