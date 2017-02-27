@@ -7,12 +7,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Java I/O | Koudle&#39;s</title>
+  <title>Java I/O 系列第一篇 | Koudle&#39;s</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Java," />
+    <meta name="keywords" content="Java,I/O," />
   
 
   <meta name="description" content="1.前言讲一讲Java I/O的一些事情。因为I/O问题很容易出现性能瓶颈，但我们在具体的开发过程中，却很少涉及到I/O之类的操作,那是因为涉及到的大部分I/O操作都被封装了起来，不被我们所感知，如：
@@ -26,7 +26,7 @@ SharedPreferences
 
 2.Java 的 I/O 类库的基本架构Java 的 I/O 操作类在包 java.io 下，大概有将近 8">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java I/O">
+<meta property="og:title" content="Java I/O 系列第一篇">
 <meta property="og:url" content="http://yoursite.com/2017/02/27/Java-IO/index.html">
 <meta property="og:site_name" content="Koudle's">
 <meta property="og:description" content="1.前言讲一讲Java I/O的一些事情。因为I/O问题很容易出现性能瓶颈，但我们在具体的开发过程中，却很少涉及到I/O之类的操作,那是因为涉及到的大部分I/O操作都被封装了起来，不被我们所感知，如：
@@ -45,9 +45,9 @@ SharedPreferences
 <meta property="og:image" content="http://yoursite.com/2017/02/27/Java-IO/writer.png">
 <meta property="og:image" content="http://yoursite.com/2017/02/27/Java-IO/file.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/02/27/Java-IO/socket.jpg">
-<meta property="og:updated_time" content="2017-02-27T13:44:26.729Z">
+<meta property="og:updated_time" content="2017-02-27T13:48:02.783Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java I/O">
+<meta name="twitter:title" content="Java I/O 系列第一篇">
 <meta name="twitter:description" content="1.前言讲一讲Java I/O的一些事情。因为I/O问题很容易出现性能瓶颈，但我们在具体的开发过程中，却很少涉及到I/O之类的操作,那是因为涉及到的大部分I/O操作都被封装了起来，不被我们所感知，如：
 
 图片库
@@ -183,7 +183,7 @@ SharedPreferences
 
 
   <div id="toc" class="toc-article">
-    <strong class="toc-title">Posts List</strong>
+    <strong class="toc-title">文章目录</strong>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-前言"><span class="toc-text">1.前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Java-的-I-O-类库的基本架构"><span class="toc-text">2.Java 的 I/O 类库的基本架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-基于字节操作的-I-O-接口"><span class="toc-text">2.1 基于字节操作的 I/O 接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2基于字符的-I-O-操作接口"><span class="toc-text">2.2基于字符的 I/O 操作接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-基于磁盘操作的-I-O-接口"><span class="toc-text">2.3 基于磁盘操作的 I/O 接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4基于网络操作的-I-O-接口"><span class="toc-text">2.4基于网络操作的 I/O 接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#建立通信链路"><span class="toc-text">建立通信链路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据传输"><span class="toc-text">数据传输</span></a></li></ol></li></ol></li></ol>
   </div>
 
@@ -192,7 +192,7 @@ SharedPreferences
 <div class="content content-post CENTER">
    <article id="post-Java-IO" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
-    <h1 class="post-title">Java I/O</h1>
+    <h1 class="post-title">Java I/O 系列第一篇</h1>
 
     <div class="article-meta">
       <span>
@@ -210,7 +210,7 @@ SharedPreferences
       
   <span class="article-category">
     <i class="icon-list"></i>
-    <a class="article-category-link" href="/categories/Java/">Java</a>
+    <a class="article-category-link" href="/categories/Java-I-O/">Java,I/O</a>
   </span>
 
 
@@ -301,7 +301,7 @@ SharedPreferences
   <span id="cover" class="cover hide"></span>
   <div id="modal-dialog" class="modal-dialog hide-dialog">
     <div class="modal-header">
-      <span id="close" class="btn-close">Close</span>
+      <span id="close" class="btn-close">关闭</span>
     </div>
     <hr>
     <div class="modal-body">
