@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>用3个View实现无线循环的ViewPager | Koudle&#39;s</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Android," />
+  
+
+  <meta name="description" content="前言用ViewPager实现无限循环，想必大家都知道，但实现无线循环的效果，其实只需要三个view便能完成，本篇就先介绍下实现无限循环的原理，在告诉大家怎么只用三个view边实现无限循环。
+LoopViewPager的原理下面有四个View：A、B、C、D，默认情况下我们只能从A-&amp;gt;B-&amp;gt;C-&amp;gt;D或者从D-&amp;gt;C-&amp;gt;B-&amp;gt;A，如下图：
+
+每当移动到两边的view时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用3个View实现无线循环的ViewPager">
+<meta property="og:url" content="http://yoursite.com/2017/03/12/loopviewpager/index.html">
+<meta property="og:site_name" content="Koudle's">
+<meta property="og:description" content="前言用ViewPager实现无限循环，想必大家都知道，但实现无线循环的效果，其实只需要三个view便能完成，本篇就先介绍下实现无限循环的原理，在告诉大家怎么只用三个view边实现无限循环。
+LoopViewPager的原理下面有四个View：A、B、C、D，默认情况下我们只能从A-&amp;gt;B-&amp;gt;C-&amp;gt;D或者从D-&amp;gt;C-&amp;gt;B-&amp;gt;A，如下图：
+
+每当移动到两边的view时">
+<meta property="og:image" content="http://yoursite.com/2017/03/12/loopviewpager/origin.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/12/loopviewpager/modify2.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/12/loopviewpager/final.png">
+<meta property="og:updated_time" content="2017-03-12T13:44:39.635Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用3个View实现无线循环的ViewPager">
+<meta name="twitter:description" content="前言用ViewPager实现无限循环，想必大家都知道，但实现无线循环的效果，其实只需要三个view便能完成，本篇就先介绍下实现无限循环的原理，在告诉大家怎么只用三个view边实现无限循环。
+LoopViewPager的原理下面有四个View：A、B、C、D，默认情况下我们只能从A-&amp;gt;B-&amp;gt;C-&amp;gt;D或者从D-&amp;gt;C-&amp;gt;B-&amp;gt;A，如下图：
+
+每当移动到两边的view时">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/12/loopviewpager/origin.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LoopViewPager的原理"><span class="toc-text">LoopViewPager的原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三个View实现无限循环"><span class="toc-text">三个View实现无限循环</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-loopviewpager" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">用3个View实现无线循环的ViewPager</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.03.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Xiaoshuai Ren</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://koudle.github.io//2017/03/12/loopviewpager/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>用ViewPager实现无限循环，想必大家都知道，但实现无线循环的效果，其实只需要三个view便能完成，本篇就先介绍下实现无限循环的原理，在告诉大家怎么只用三个view边实现无限循环。</p>
+<h3 id="LoopViewPager的原理"><a href="#LoopViewPager的原理" class="headerlink" title="LoopViewPager的原理"></a>LoopViewPager的原理</h3><p>下面有四个View：A、B、C、D，默认情况下我们只能从A-&gt;B-&gt;C-&gt;D或者从D-&gt;C-&gt;B-&gt;A，如下图：</p>
+<img src="/2017/03/12/loopviewpager/origin.png" alt="origin.png" title="">
+<p>每当移动到两边的view时，就没办法在滑动下去了，而要实现无限循环滑动，必须得实现这样的效果，A-&gt;B-&gt;C-&gt;D-&gt;A,或者D-&gt;C-&gt;B-&gt;-A-&gt;D,所以我们出现了方案1如下图：</p>
+
+<p>当在D上往左拖动的时候，就定位到A，而当A往右拖动的时候就定位到D，但是这个方案有个巨大的缺陷，当D往左拖动的时候，D的右边是没有view的，这样就不会有拖动中view的动画效果，所以这个方案pass。</p>
+<p>继续上面的思路想，那往D的右边加一个和A一样的view（我们暂时称为A’），这样当D往左拖动的时候，显示的是A’，当拖动动画结束的时候，定位到A（PS：这样里用ViewPager.setCurrentItem(A,false)来实现，因为是false，所以不会展现动画，用户就感知不到这里的变化），这里用setCurr这样就又从头开始，这个方法可行，效果图如下：</p>
+<img src="/2017/03/12/loopviewpager/modify2.png" alt="方案二" title="方案二">
+<p>具体的实现代码请看： <a href="https://github.com/imbryk/LoopingViewPager" target="_blank" rel="external">https://github.com/imbryk/LoopingViewPager</a><br>这个代码就是按照方面二的思路来实现的，这里的例子给的是4个view，之后不管我们要实现多少个view的无限循环，只要我们在队首加一个最后的view，在队尾加一个第一个的view，我们都能实现无限循环。</p>
+<p>到这里就结束了？当然没有，因为我们的目标是不管你要展示多少个view，我们只用三个view就可以实现全部view的无限循环！</p>
+<h3 id="三个View实现无限循环"><a href="#三个View实现无限循环" class="headerlink" title="三个View实现无限循环"></a>三个View实现无限循环</h3><p>先看图：</p>
+<img src="/2017/03/12/loopviewpager/final.png" alt="三个View实现无限循环" title="三个View实现无限循环">
+<p>我们可以看到这个方案其实和上面的方案二很像，不同的是我们用到了view的复用，而且我们给用户展现的永远是第二个view，每当用户有滑动操作的时候，我们就更新<br>第二个view的数据，以此来更新试图，让用户误以为自己是在无限滑动</p>
+<p>具体的代码可以查看我的工程，欢迎star，github地址为： <a href="https://github.com/koudle/ThreeInfiniteViewPager" target="_blank" rel="external">https://github.com/koudle/ThreeInfiniteViewPager</a></p>
+
+    
+  </div>
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/03/12/viewpager-webview/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'koudle';
+    
+    var disqus_url = 'http://yoursite.com/2017/03/12/loopviewpager/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//koudle.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
