@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>一个步骤教你调试Android系统源代码 | Koudle&#39;s</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Android," />
+  
+
+  <meta name="description" content="有时候我们为了搞懂Android系统组件的运行原理，需要查看系统的源代码，但是如果我们不仅能看源码，要是还能调试，岂不是更好更方便。
+所以，我们就说下如何调试系统源代码。其实很简单的了。
+1.确认自己手机的API Level这个很简单了，就是确定自己手机系统的版本号，然后下载对应的源码，如果手机系统的版本和源码的版本对不上，那么debug的时候很容易出现对应不上代码行数的问题，因为每个版本的源码都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个步骤教你调试Android系统源代码">
+<meta property="og:url" content="http://yoursite.com/2017/03/13/debug-android-source/index.html">
+<meta property="og:site_name" content="Koudle's">
+<meta property="og:description" content="有时候我们为了搞懂Android系统组件的运行原理，需要查看系统的源代码，但是如果我们不仅能看源码，要是还能调试，岂不是更好更方便。
+所以，我们就说下如何调试系统源代码。其实很简单的了。
+1.确认自己手机的API Level这个很简单了，就是确定自己手机系统的版本号，然后下载对应的源码，如果手机系统的版本和源码的版本对不上，那么debug的时候很容易出现对应不上代码行数的问题，因为每个版本的源码都">
+<meta property="og:image" content="http://yoursite.com/2017/03/13/debug-android-source/sdk_manager.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/13/debug-android-source/right.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/13/debug-android-source/error.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/13/debug-android-source/android.jpg">
+<meta property="og:updated_time" content="2017-03-13T12:40:55.011Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个步骤教你调试Android系统源代码">
+<meta name="twitter:description" content="有时候我们为了搞懂Android系统组件的运行原理，需要查看系统的源代码，但是如果我们不仅能看源码，要是还能调试，岂不是更好更方便。
+所以，我们就说下如何调试系统源代码。其实很简单的了。
+1.确认自己手机的API Level这个很简单了，就是确定自己手机系统的版本号，然后下载对应的源码，如果手机系统的版本和源码的版本对不上，那么debug的时候很容易出现对应不上代码行数的问题，因为每个版本的源码都">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/13/debug-android-source/sdk_manager.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-确认自己手机的API-Level"><span class="toc-text">1.确认自己手机的API Level</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-用Android-Studio自带的SDK-Manager下载对应版本的源码"><span class="toc-text">2.用Android Studio自带的SDK Manager下载对应版本的源码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-还有最重要的一点，compileSdkVersion"><span class="toc-text">3.还有最重要的一点，compileSdkVersion</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-最后一部，加上断点，attach上进程，就可以愉快的调试源码了"><span class="toc-text">4.最后一部，加上断点，attach上进程，就可以愉快的调试源码了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#补充"><span class="toc-text">补充</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-debug-android-source" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">一个步骤教你调试Android系统源代码</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.03.13</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Xiaoshuai Ren</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://koudle.github.io//2017/03/13/debug-android-source/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>有时候我们为了搞懂Android系统组件的运行原理，需要查看系统的源代码，但是如果我们不仅能看源码，要是还能调试，岂不是更好更方便。</p>
+<p>所以，我们就说下如何调试系统源代码。其实很简单的了。</p>
+<h4 id="1-确认自己手机的API-Level"><a href="#1-确认自己手机的API-Level" class="headerlink" title="1.确认自己手机的API Level"></a>1.确认自己手机的API Level</h4><p>这个很简单了，就是确定自己手机系统的版本号，然后下载对应的源码，如果手机系统的版本和源码的版本对不上，那么debug的时候很容易出现对应不上代码行数的问题，因为每个版本的源码都可能有更新。</p>
+<h4 id="2-用Android-Studio自带的SDK-Manager下载对应版本的源码"><a href="#2-用Android-Studio自带的SDK-Manager下载对应版本的源码" class="headerlink" title="2.用Android Studio自带的SDK Manager下载对应版本的源码"></a>2.用Android Studio自带的SDK Manager下载对应版本的源码</h4><p>“Tools” –&gt; “Android” –&gt; “SDK Manager”<br>如下图：</p>
+<img src="/2017/03/13/debug-android-source/sdk_manager.png" alt="SDK Manager" title="SDK Manager">
+<ul>
+<li>注意<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. 右下角的 &quot;Show Package Details&quot; 请勾选上</div><div class="line">2. 在Android 7.1.1 (Nougat)下面有一个选项 &quot;Sources For Android 25&quot; ，这个就是我们要下载的源码，请选中下载</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-还有最重要的一点，compileSdkVersion"><a href="#3-还有最重要的一点，compileSdkVersion" class="headerlink" title="3.还有最重要的一点，compileSdkVersion"></a>3.还有最重要的一点，compileSdkVersion</h4><p>compileSdkVersion,是用来告诉Gradle用哪个Android  SDK版本来编译APK，所以这里的compileSdkVersion也必须和第一步中你手机的API Level保持一致，否则，你在IDE上用到的Android SDK的源码和你的手机系统的版本不一致，就会出现调试的代码行数对不上的问题。</p>
+<p>这里还有一点说明一下，当你查看源码的时候，有这样一个路径，如下图：</p>
+<img src="/2017/03/13/debug-android-source/right.png" alt="android-25 viewGroup的源码" title="android-25 viewGroup的源码">
+<p>这里我们的compileSdkVersion是25,所以查看的源码路径上是/android-sdk-linux/sources/<code>android-25</code>，注意这里的android-25，而且ViewGroup.java显示的也是普通java文件的样子，现在给一个错误的例子，我们选择android-23的ViewGroup.java，显示的却是下图：<br><img src="/2017/03/13/debug-android-source/error.png" alt="android-23 viewGroup的源码" title="android-23 viewGroup的源码"><br>很容易看到不同的地发</p>
+<h4 id="4-最后一部，加上断点，attach上进程，就可以愉快的调试源码了"><a href="#4-最后一部，加上断点，attach上进程，就可以愉快的调试源码了" class="headerlink" title="4.最后一部，加上断点，attach上进程，就可以愉快的调试源码了"></a>4.最后一部，加上断点，attach上进程，就可以愉快的调试源码了</h4><p>这里和我们调试普通代码就是一样的了。经过上面的操作，Android源码就像我们添加的一个库一样。</p>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><p>刚开始我是用Nexus 6P来调试的，因为是谷歌的亲儿子，后来用同样的方法试了华为的手机，发现也可以，所以虽然一些第三方ROM有很多更改的地方，但对一些基本的FrameWork应该是没啥改动的，改的更多的应该是桌面啊这些，但这些已经属于Application层了，现在给张Android 体系结构图。</p>
+<img src="/2017/03/13/debug-android-source/android.jpg" alt="Android 体系结构图" title="Android 体系结构图">
+    
+  </div>
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/03/12/loopviewpager/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'koudle';
+    
+    var disqus_url = 'http://yoursite.com/2017/03/13/debug-android-source/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//koudle.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
