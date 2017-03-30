@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>为什么使用git | Koudle&#39;s</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="git," />
+  
+
+  <meta name="description" content="SVN与GIT的区别
+概念 SVN:集中化的版本控制系统 GIT:分布式版本控制系统
+1集中化的系统，受限于服务器，比如：提交记录，如果我离线的话，提交记录是看不到的；代码更改，我想查看每次提交的更改也很困难；
+
+文件记录方式  SVN:记录每个文件的变化，每个版本存储前后变化的差异数据  GIT:记录整体数据的变化，每次提交，把所有文件生成一个快照，和前面一次提交对比，若文件没变化，直接指向上一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么使用git">
+<meta property="og:url" content="http://yoursite.com/2017/03/30/git/index.html">
+<meta property="og:site_name" content="Koudle's">
+<meta property="og:description" content="SVN与GIT的区别
+概念 SVN:集中化的版本控制系统 GIT:分布式版本控制系统
+1集中化的系统，受限于服务器，比如：提交记录，如果我离线的话，提交记录是看不到的；代码更改，我想查看每次提交的更改也很困难；
+
+文件记录方式  SVN:记录每个文件的变化，每个版本存储前后变化的差异数据  GIT:记录整体数据的变化，每次提交，把所有文件生成一个快照，和前面一次提交对比，若文件没变化，直接指向上一">
+<meta property="og:updated_time" content="2017-03-30T13:07:28.570Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="为什么使用git">
+<meta name="twitter:description" content="SVN与GIT的区别
+概念 SVN:集中化的版本控制系统 GIT:分布式版本控制系统
+1集中化的系统，受限于服务器，比如：提交记录，如果我离线的话，提交记录是看不到的；代码更改，我想查看每次提交的更改也很困难；
+
+文件记录方式  SVN:记录每个文件的变化，每个版本存储前后变化的差异数据  GIT:记录整体数据的变化，每次提交，把所有文件生成一个快照，和前面一次提交对比，若文件没变化，直接指向上一">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SVN与GIT的区别"><span class="toc-text">SVN与GIT的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对GIT的一些误区"><span class="toc-text">对GIT的一些误区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么使用GIT"><span class="toc-text">为什么使用GIT?</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-git" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">为什么使用git</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.03.30</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Xiaoshuai Ren</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://koudle.github.io//2017/03/30/git/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="SVN与GIT的区别"><a href="#SVN与GIT的区别" class="headerlink" title="SVN与GIT的区别"></a>SVN与GIT的区别</h2><ul>
+<li><p>概念<br> SVN:集中化的版本控制系统<br> GIT:分布式版本控制系统</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">集中化的系统，受限于服务器，比如：提交记录，如果我离线的话，提交记录是看不到的；代码更改，我想查看每次提交的更改也很困难；</div></pre></td></tr></table></figure>
+</li>
+<li><p>文件记录方式<br>  SVN:记录每个文件的变化，每个版本存储前后变化的差异数据<br>  GIT:记录整体数据的变化，每次提交，把所有文件生成一个快照，和前面一次提交对比，若文件没变化，直接指向上一次文件，只记录变化的文件</p>
+</li>
+<li><p>分支的创建和合并<br> SVN:每次分支都是对之前代码重新拷贝到一个新目录<br> GIT:分支的创建和合并代价很小，十分方便</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">很明显的一个地方是文件的大小，SVN有几个分支，大小就增加几倍，而git使用指针记录每次提交的，分支的创建和合并其实就是对指针的操作，效率可见一斑</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="对GIT的一些误区"><a href="#对GIT的一些误区" class="headerlink" title="对GIT的一些误区"></a>对GIT的一些误区</h2><ul>
+<li><p>git≠github</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git是分布式的版本控制系统</div><div class="line">github是一个托管git库的网站，使用git作为代码版本管理工具,github是全球最大的代码开源网站，上面的大部分git库都是公开(public)的，就是所有人都可以访问，也有私有库(private),只有拥有权限的人才可以访问</div><div class="line">gitlab是一个用于仓库管理系统的开源项目，可以理解成和github是一样的，提供web界面管理git仓库，但是可以搭建在私有服务器上，保证代码安全</div></pre></td></tr></table></figure>
+</li>
+<li><p>git不慢</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">感觉大部分人都觉的git很慢，这是一个很大的误区，可能是大部分人刚开始都是通过github接触git的，github的服务器在国外，而且我大天朝的网络环境，大家都懂的，其实从上面对git和svn实现原理的比较，显然git比svn快，如果我们都用内网的git服务，就不会感觉git慢了</div></pre></td></tr></table></figure>
+<ul>
+<li>觉得git麻烦</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">可能是大部分人一接触git，需要一大堆配置就觉得麻烦，所以要给大家讲明白为什么需要这些配置，git使用的ssh协议(http也支持)，ssh通过公私玥来加密数据，所以一开始会让大家生成一个公钥并上传到网站上，为了标明每次commit是谁提交的，会配置开发者的一些基本信息</div></pre></td></tr></table></figure>
+<ul>
+<li>git和svn一样简单易上手</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">为什么这么说呢，因为从本质上来说，都是版本管理系统，我们从常用的几个操作来说:</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>svn</th>
+<th>git</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>从服务器拉工程</td>
+<td>check out</td>
+<td>clone</td>
+</tr>
+<tr>
+<td>提交</td>
+<td>commit</td>
+<td>commit-&gt;push</td>
+</tr>
+<tr>
+<td>更新</td>
+<td>update</td>
+<td>pull</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">可以发现步骤基本是一样的</div></pre></td></tr></table></figure>
+<p><a href="https://zh.wikipedia.org/wiki/Secure_Shell" target="_blank" rel="external">ssh详解</a><br><a href="https://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86" target="_blank" rel="external">公开密钥加密</a></p>
+<h2 id="为什么使用GIT"><a href="#为什么使用GIT" class="headerlink" title="为什么使用GIT?"></a>为什么使用GIT?</h2><ul>
+<li>为了装逼？</li>
+<li><p>因为别人用，所以我们也用？</p>
+<p>肯定不是这些原因，使用git是为了:</p>
+</li>
+<li><p>提高开发效率!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git不仅仅是一个代码版本管理工具，也是一个文档管理工具，在git上很容易维护一个文档</div></pre></td></tr></table></figure>
+<p>git可以提高开发效率，主要表现在:</p>
+<ul>
+<li>合并对提交过程的保留</li>
+<li>修正提交</li>
+<li>廉价好用的本地分支</li>
+<li>更强大智能的合并能力</li>
+<li>完整配套的开发过程设施(wiki issue 功能大赞！)</li>
+<li>查看日志</li>
+</ul>
+</li>
+</ul>
+
+    
+  </div>
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/03/30/systemgc/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'koudle';
+    
+    var disqus_url = 'http://yoursite.com/2017/03/30/git/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//koudle.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
