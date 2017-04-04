@@ -7,27 +7,42 @@
 <head>
   <meta charset="utf-8">
   
-  <title>高质量开发： 0 Bug 是一种习惯 | Koudle&#39;s</title>
+  <title>Hexo生成文章的时间问题 | Koudle&#39;s</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Android,Java" />
+    <meta name="keywords" content="hexo," />
   
 
-  <meta name="description" content="掐值算一下，工作已经3年，大大小小的项目做过很多，代码也写了有几十万行，但大多数时间里发现bug也如影随形，项目小bug少，项目大bug跟着也大，难道bug就没法杜绝了吗？我想说不是的，写代码也可以有0bug，0 bug是一种习惯，今天想谈一谈高质量需求开发。
-bug 分析高质量需求开发的步骤需求分析开发评估沟通和管理测试常见问题产品意识沟通项目管理">
+  <meta name="description" content="###问题描述
+
+文章以更新的时间排序而不是创建的事件
+
+###问题分析因为默认创建的文章没有date属相，导致每次更改文章，就会更新文章的date属相
+###问题解决
+####添加date属相在scaffolds目录下的post.md中添加date属相，如下：1234title: &amp;#123;&amp;#123; title &amp;#125;&amp;#125;categories:tags:date: &amp;#123">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高质量开发： 0 Bug 是一种习惯">
-<meta property="og:url" content="http://yoursite.com/2017/04/02/0day/index.html">
+<meta property="og:title" content="Hexo生成文章的时间问题">
+<meta property="og:url" content="http://yoursite.com/2017/04/04/hexo-post/index.html">
 <meta property="og:site_name" content="Koudle's">
-<meta property="og:description" content="掐值算一下，工作已经3年，大大小小的项目做过很多，代码也写了有几十万行，但大多数时间里发现bug也如影随形，项目小bug少，项目大bug跟着也大，难道bug就没法杜绝了吗？我想说不是的，写代码也可以有0bug，0 bug是一种习惯，今天想谈一谈高质量需求开发。
-bug 分析高质量需求开发的步骤需求分析开发评估沟通和管理测试常见问题产品意识沟通项目管理">
-<meta property="og:updated_time" content="2017-04-02T11:47:59.184Z">
+<meta property="og:description" content="###问题描述
+
+文章以更新的时间排序而不是创建的事件
+
+###问题分析因为默认创建的文章没有date属相，导致每次更改文章，就会更新文章的date属相
+###问题解决
+####添加date属相在scaffolds目录下的post.md中添加date属相，如下：1234title: &amp;#123;&amp;#123; title &amp;#125;&amp;#125;categories:tags:date: &amp;#123">
+<meta property="og:updated_time" content="2017-04-04T14:48:13.646Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="高质量开发： 0 Bug 是一种习惯">
-<meta name="twitter:description" content="掐值算一下，工作已经3年，大大小小的项目做过很多，代码也写了有几十万行，但大多数时间里发现bug也如影随形，项目小bug少，项目大bug跟着也大，难道bug就没法杜绝了吗？我想说不是的，写代码也可以有0bug，0 bug是一种习惯，今天想谈一谈高质量需求开发。
-bug 分析高质量需求开发的步骤需求分析开发评估沟通和管理测试常见问题产品意识沟通项目管理">
+<meta name="twitter:title" content="Hexo生成文章的时间问题">
+<meta name="twitter:description" content="###问题描述
+
+文章以更新的时间排序而不是创建的事件
+
+###问题分析因为默认创建的文章没有date属相，导致每次更改文章，就会更新文章的date属相
+###问题解决
+####添加date属相在scaffolds目录下的post.md中添加date属相，如下：1234title: &amp;#123;&amp;#123; title &amp;#125;&amp;#125;categories:tags:date: &amp;#123">
 
   
 
@@ -151,22 +166,17 @@ bug 分析高质量需求开发的步骤需求分析开发评估沟通和管理�
 </div>
 
 
-  <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bug-分析"><span class="toc-text">bug 分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高质量需求开发的步骤"><span class="toc-text">高质量需求开发的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#需求分析"><span class="toc-text">需求分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开发评估"><span class="toc-text">开发评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#沟通和管理"><span class="toc-text">沟通和管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#产品意识"><span class="toc-text">产品意识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#沟通"><span class="toc-text">沟通</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目管理"><span class="toc-text">项目管理</span></a></li></ol></li></ol>
-  </div>
-
 
 
 <div class="content content-post CENTER">
-   <article id="post-0day" class="article article-type-post" itemprop="blogPost">
+   <article id="post-hexo-post" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
-    <h1 class="post-title">高质量开发： 0 Bug 是一种习惯</h1>
+    <h1 class="post-title">Hexo生成文章的时间问题</h1>
 
     <div class="article-meta">
       <span>
         <i class="icon-calendar"></i>
-        <span>2017.04.02</span>
+        <span>2017.04.04</span>
       </span>
 
       
@@ -177,12 +187,17 @@ bug 分析高质量需求开发的步骤需求分析开发评估沟通和管理�
       
 
       
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+  </span>
+
 
 
       
         <span>
           <i class="icon-comment"></i>
-          <a href="https://koudle.github.io//2017/04/02/0day/#disqus_thread"></a>
+          <a href="https://koudle.github.io//2017/04/04/hexo-post/#disqus_thread"></a>
         </span>
       
 
@@ -201,8 +216,17 @@ bug 分析高质量需求开发的步骤需求分析开发评估沟通和管理�
 
   <div class="article-content">
     
-      <p>掐值算一下，工作已经3年，大大小小的项目做过很多，代码也写了有几十万行，但大多数时间里发现bug也如影随形，项目小bug少，项目大bug跟着也大，难道bug就没法杜绝了吗？我想说不是的，写代码也可以有0bug，0 bug是一种习惯，今天想谈一谈高质量需求开发。</p>
-<h2 id="bug-分析"><a href="#bug-分析" class="headerlink" title="bug 分析"></a>bug 分析</h2><h2 id="高质量需求开发的步骤"><a href="#高质量需求开发的步骤" class="headerlink" title="高质量需求开发的步骤"></a>高质量需求开发的步骤</h2><h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><h3 id="开发评估"><a href="#开发评估" class="headerlink" title="开发评估"></a>开发评估</h3><h3 id="沟通和管理"><a href="#沟通和管理" class="headerlink" title="沟通和管理"></a>沟通和管理</h3><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="产品意识"><a href="#产品意识" class="headerlink" title="产品意识"></a>产品意识</h3><h3 id="沟通"><a href="#沟通" class="headerlink" title="沟通"></a>沟通</h3><h3 id="项目管理"><a href="#项目管理" class="headerlink" title="项目管理"></a>项目管理</h3>
+      <p>###问题描述</p>
+<ol>
+<li>文章以更新的时间排序而不是创建的事件</li>
+</ol>
+<p>###问题分析<br>因为默认创建的文章没有date属相，导致每次更改文章，就会更新文章的date属相</p>
+<p>###问题解决</p>
+<p>####添加date属相<br>在<code>scaffolds</code>目录下的<code>post.md</code>中添加date属相，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">title: &#123;&#123; title &#125;&#125;</div><div class="line">categories:</div><div class="line">tags:</div><div class="line">date: &#123;&#123; date &#125;&#125;</div></pre></td></tr></table></figure></p>
+<p>这样之后每次用<code>hexo new post</code>创建的文章，都会带上date属相，date的值为创建文章的当前事件，以后每次更新文章，只要不更改date的值，文章的事件就不会边</p>
+<p>####生成错误<br>当上面改动完成，运行<code>hexo g</code>的时候发现会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">TypeError: Cannot read property &apos;offset&apos; of null</div><div class="line">    at Object.exports.timezone (E:\blog\qksblog\node_modules\hexo\lib\plugins\processor\common.js:43:40)</div><div class="line">    at E:\blog\qksblog\node_modules\hexo\lib\plugins\processor\post.js:118:40</div><div class="line">    at tryCatcher (E:\blog\qksblog\node_modules\hexo\node_modules\bluebird\js\main\util.js:26:23)</div><div class="line">    at Promise._settlePromiseFromHandler (E:\blog\qksblog\node_modules\hexo\node_modules\bluebird\js\main\promise.js:505:31)</div><div class="line">    at Promise._settlePromiseAt (E:\blog\qksblog\node_modules\hexo\node_modules\bluebird\js\main\promise.js:581:18)</div><div class="line">    at Promise._settlePromises (E:\blog\qksblog\node_modules\hexo\node_modules\bluebird\js\main\promise.js:697:14)</div><div class="line">    at Async._drainQueue (E:\blog\qksblog\node_modules\hexo\node_modules\bluebird\js\main\async.js:123:16)</div><div class="line">    at Async._drainQueues (E:\blog\qksblog\node_modules\hexo\node_modules\bluebird\js\main\async.js:133:10)</div><div class="line">    at Immediate.Async.drainQueues [as _onImmediate] (E:\blog\qksblog\node_modules\hexo\node_modules\bluebird\js\main\async.js:15:14)</div><div class="line">    at processImmediate [as _immediateCallback] (timers.js:374:17)</div></pre></td></tr></table></figure></p>
+<p>原因是_confing.yml下的timezone配置错误：<br>需要将timezone配置成 时区名称：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">timezone: Asia/Shanghai</div></pre></td></tr></table></figure></p>
+
     
   </div>
 </article>
@@ -212,10 +236,10 @@ bug 分析高质量需求开发的步骤需求分析开发评估沟通和管理�
 
    
   <div class="box-prev-next clearfix">
-    <a class="show pull-left" href="/2017/03/30/git/">
+    <a class="show pull-left" href="/2017/04/02/0day/">
         <i class="icon icon-angle-left"></i>
     </a>
-    <a class="show pull-right" href="/2017/04/04/hexo-post/">
+    <a class="hide pull-right" href="/">
         <i class="icon icon-angle-right"></i>
     </a>
   </div>
@@ -307,7 +331,7 @@ bug 分析高质量需求开发的步骤需求分析开发评估沟通和管理�
   <script>
     var disqus_shortname = 'koudle';
     
-    var disqus_url = 'http://yoursite.com/2017/04/02/0day/';
+    var disqus_url = 'http://yoursite.com/2017/04/04/hexo-post/';
     
     (function(){
       var dsq = document.createElement('script');
