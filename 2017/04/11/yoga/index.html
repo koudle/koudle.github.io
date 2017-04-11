@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Facebook YOGA初探:跨平台的布局引擎(基于Android) | Koudle&#39;s</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Android," />
+  
+
+  <meta name="description" content="YOGA简介Facebook引领着移动开源风向，这次它对布局出手了，推出了Yoga开源项目，意在打造一个跨iOS、Android、Windows平台在内的布局引擎，兼容Flexbox布局方式，让界面布局更加简单。
+Yoga官网：https://facebook.github.io/yoga/
+官网上描述的特性包括：
+
+完全兼容Flexbox布局，遵守W3C的规范
+
+支持Java、C#、Objec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Facebook YOGA初探:跨平台的布局引擎(基于Android)">
+<meta property="og:url" content="http://yoursite.com/2017/04/11/yoga/index.html">
+<meta property="og:site_name" content="Koudle's">
+<meta property="og:description" content="YOGA简介Facebook引领着移动开源风向，这次它对布局出手了，推出了Yoga开源项目，意在打造一个跨iOS、Android、Windows平台在内的布局引擎，兼容Flexbox布局方式，让界面布局更加简单。
+Yoga官网：https://facebook.github.io/yoga/
+官网上描述的特性包括：
+
+完全兼容Flexbox布局，遵守W3C的规范
+
+支持Java、C#、Objec">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/523749-1e53924c53cfec6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/523749-c5157f978bea0fe0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-04-11T13:14:36.157Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Facebook YOGA初探:跨平台的布局引擎(基于Android)">
+<meta name="twitter:description" content="YOGA简介Facebook引领着移动开源风向，这次它对布局出手了，推出了Yoga开源项目，意在打造一个跨iOS、Android、Windows平台在内的布局引擎，兼容Flexbox布局方式，让界面布局更加简单。
+Yoga官网：https://facebook.github.io/yoga/
+官网上描述的特性包括：
+
+完全兼容Flexbox布局，遵守W3C的规范
+
+支持Java、C#、Objec">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/523749-1e53924c53cfec6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#YOGA简介"><span class="toc-text">YOGA简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用展望"><span class="toc-text">应用展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YOGA初探"><span class="toc-text">YOGA初探</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#生成so"><span class="toc-text">生成so</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建Android工程"><span class="toc-text">创建Android工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sample"><span class="toc-text">sample</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工程"><span class="toc-text">工程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文章参考"><span class="toc-text">文章参考:</span></a></li></ol></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-yoga" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Facebook YOGA初探:跨平台的布局引擎(基于Android)</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.04.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Xiaoshuai Ren</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://koudle.github.io//2017/04/11/yoga/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p><img src="http://upload-images.jianshu.io/upload_images/523749-1e53924c53cfec6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="YOGA简介"><a href="#YOGA简介" class="headerlink" title="YOGA简介"></a>YOGA简介</h1><p>Facebook引领着移动开源风向，这次它对布局出手了，推出了Yoga开源项目，意在打造一个跨iOS、Android、Windows平台在内的布局引擎，兼容Flexbox布局方式，让界面布局更加简单。</p>
+<p>Yoga官网：<a href="https://facebook.github.io/yoga/" target="_blank" rel="external">https://facebook.github.io/yoga/</a></p>
+<p>官网上描述的特性包括：</p>
+<ul>
+<li><p>完全兼容Flexbox布局，遵守W3C的规范</p>
+</li>
+<li><p>支持Java、C#、Objective-C、C四种语言</p>
+</li>
+<li><p>底层代码使用C语言编写，性能不是问题</p>
+</li>
+<li><p>支持流行框架如React Native</p>
+</li>
+</ul>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>目前，各个平台都有自己的一套解决方案。iOS平台有AutoLayout，Android有容器布局系统，而Web端有基于CSS的布局系统。多种布局系统共存所带来的弊端是很明显的，平台间的共享变得很困难，而每个平台都需要专人来开发维护，增加了开发成本。</p>
+<p>像微信小程序、ReactNative这种，都是采用js/html/css开发，客户端native展现的方式，那如何把前端的布局对应到Android/iOS的不同平台上？</p>
+<p>微信小程序、ReactNative都是怎么来实现的？</p>
+<p>YOGA就是为了解决这样的问题产生的。</p>
+<p>在React Native里Facebook里引入了一种跨平台的基于CSS的布局系统，它实现了Flexbox规范。基于这个布局系统，不同团队终于可以走到一起，一起解决缺陷，改进性能，让这个系统更加地贴合Flexbox规范。随着这个系统的不断完善，Facebook决定对它进行重启发布，并取名Yoga。</p>
+<p>Yoga是基于C实现的。之所以选择C，首先当然是从性能方面考虑的。基于C实现的Yoga比之前Java实现在性能上提升了33%。其次，使用C实现可以更容易地跟其它平台集成。到目前为止，Yoga已经有以下几个平台的绑定：Java（Android）、Objective-C（UIKit）、C#（.NET）。而且已经有很多项目在使用Yoga，比如React Native、Components for Android、Oculus，等等。</p>
+<p>不同于其它的一些布局框架，比如bootstrap的栅格系统或Masonry，它们要么不够强大，要么不支持跨平台。Yoga遵循了Flexbox规范，同时又将布局元素抽象成Node，为各个不同平台暴露出一组标准的接口，这样不同的平台只需实现这些接口就可以了。</p>
+<p>当然，Facebook不会就此止步。作为一款跨平台的布局引擎，自然需要各个平台的开发人员一起努力来促进它的发展，所以Facebook把Yoga开源了。目前微软已经成为Yoga的贡献者之一，他们不仅修复缺陷，还为Yoga带来新的特性。</p>
+<p>除了完全遵循Flexbox规范，Facebook还计划在未来为Yoga加入更多特性，这些特性将超出Flexbox的范畴。</p>
+<h2 id="应用展望"><a href="#应用展望" class="headerlink" title="应用展望"></a>应用展望</h2><p>从目前为止，困扰客户端的一大问题就是Android/iOS完全不同的布局系统，对于Android来说复杂的布局必须使用xml来描述，而xml不能动态发布的特性，也完全限制了客户端view的展现，试想一下，如果能把Android/iOS的布局统一，并且可以根据下发的布局配置实时生成动态的布局，岂不是很爽！</p>
+<p>利用YOGA我们可以</p>
+<ul>
+<li>只写一次布局，就可以得到在不同端上的布局展示。</li>
+<li>动态更改view的布局</li>
+<li>还有各种意义。。。</li>
+</ul>
+<p>总的来说，大前端的趋势越发明显</p>
+<h2 id="YOGA初探"><a href="#YOGA初探" class="headerlink" title="YOGA初探"></a>YOGA初探</h2><p>当得知YOGA开源的消息时，楼主第一时间去github上看了源代码，Facebook提供了iOS和Windows的sample工程，唯独没有提供Android的example，只有一个Java库的代码，于是楼主在想既然源码都有，那写一个Android的example，于是就动起手来，最后终于把YOGA集成在了Android的工程上，并顺利跑通。具体过程如下。</p>
+<h3 id="生成so"><a href="#生成so" class="headerlink" title="生成so"></a>生成so</h3><p>YOGA是基于C实现的，因此我们的思路很明确，就是把YOGA的C代码交叉编译成可在<br>Android上运行的so。这里我们需要用到<a href="https://buckbuild.com/" target="_blank" rel="external">BUCK</a>,因为YOGA是基于BUCK构建的，BUCK可以理解成是和Gradle一样的构建工具，这里有一个关于Gradle和Buck的构建速度对图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/523749-c5157f978bea0fe0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>要得到android-armv7的so，需要交叉编译，我们需要确保本地已经安装了Android NDK的环境，可以参考<a href="https://developer.android.com/ndk/index.html" target="_blank" rel="external">Android 官网</a>。</p>
+<p>通过分析YOGA工程的BUCK配置，发现YOGA由3个模块组成，分布在三个地方，分别是:</p>
+<ul>
+<li>libyogacore.so 在/yoga目录下</li>
+<li>libyouga.so 在/java/jni目录下</li>
+<li>liblib_fb_fbjni.so 在/lib/fb 目录下</li>
+</ul>
+<p>我们只要执行BUCK的构建代码，就可以生成上面提到的三个so，构建代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ buck build //java:jni#android-armv7,shared</div></pre></td></tr></table></figure></p>
+<p>这里有坑，编译时我们需要两个flavor，分别是<code>android-armv7</code>和<code>shared</code></p>
+<ul>
+<li>android-armv7 就是支持armeabi架构的.so文件，这里需要有NDK环境的支持</li>
+<li>shared 就是生成动态链接库</li>
+</ul>
+<p>因为，如果我们直接使用默认的构建配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ buck build</div></pre></td></tr></table></figure></p>
+<p>会发现，生成的不是动态链接库so，而是静态链接库，而且也不是基于android-armv7生成的so，所以需要指定编译的platform和明确要编译的是动态链接库，才能生成可用的so.</p>
+<p>当完成上面的步骤之后，我们还会发现一个问题，就是当你的工程在加载so的时候，会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">can&apos;t find  libgnustl_shared.so</div></pre></td></tr></table></figure></p>
+<p>这时我们需要把ndk目录下的 libgnustl_shared.so 也拷贝到工程目录下，路径如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android-ndk-r13b/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a</div></pre></td></tr></table></figure></p>
+<p>为什么会有这样的</p>
+<h3 id="创建Android工程"><a href="#创建Android工程" class="headerlink" title="创建Android工程"></a>创建Android工程</h3><p>在生成so之后，后面的步骤大家应该很清楚了，把生成的so放在Android目录下的jniLibs下，并把YOGA中的java库引入工程，一个完整的可以运行YOGA的Android工程就创建好了。</p>
+<h3 id="sample"><a href="#sample" class="headerlink" title="sample"></a>sample</h3><p>目前写了一个很简单的用YOGA实现的布局，首先我们用基于Flexbox的规范来布局view，然后调用<code>root.calculateLayout()</code> 就可以得到在Android下的view的坐标、长、宽等基本布局信息,代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">YogaNode root = new YogaNode();</div><div class="line">root.setWidth(500);</div><div class="line">root.setHeight(300);</div><div class="line">root.setAlignItems(YogaAlign.CENTER);</div><div class="line">root.setJustifyContent(YogaJustify.CENTER);</div><div class="line">root.setPadding(YogaEdge.ALL, 20);</div><div class="line"></div><div class="line">YogaNode text = new YogaNode();</div><div class="line">text.setWidth(200);</div><div class="line">text.setHeight(25);</div><div class="line"></div><div class="line">YogaNode image = new YogaNode();</div><div class="line">image.setWidth(50);</div><div class="line">image.setHeight(50);</div><div class="line">image.setPositionType(YogaPositionType.ABSOLUTE);</div><div class="line">image.setPosition(YogaEdge.END, 20);</div><div class="line">image.setPosition(YogaEdge.TOP, 20);</div><div class="line"></div><div class="line">root.addChildAt(text, 0);</div><div class="line">root.addChildAt(image, 1);</div><div class="line"></div><div class="line">root.calculateLayout();</div><div class="line"></div><div class="line">Log.d(TAG,&quot;text,layout X:&quot;+text.getLayoutX()+&quot; layout Y:&quot;+text.getLayoutY());</div><div class="line">Log.d(TAG,&quot;image,layout X:&quot;+image.getLayoutX()+&quot; layout Y:&quot;+image.getLayoutY());</div></pre></td></tr></table></figure>
+<h3 id="工程"><a href="#工程" class="headerlink" title="工程"></a>工程</h3><p>目前我把基于YOGA的Android工程已传到github，欢迎各位多多交流，多给star。Thanks!<br>地址:<a href="https://github.com/koudle/AndYogaSample" target="_blank" rel="external">https://github.com/koudle/AndYogaSample</a></p>
+<h4 id="文章参考"><a href="#文章参考" class="headerlink" title="文章参考:"></a>文章参考:</h4><p><a href="https://facebook.github.io/yoga/" target="_blank" rel="external">https://facebook.github.io/yoga/</a><br><a href="https://buckbuild.com/" target="_blank" rel="external">https://buckbuild.com/</a><br><a href="http://mp.weixin.qq.com/s/VT6uytG8di-KNfJDCZE5Og" target="_blank" rel="external">http://mp.weixin.qq.com/s/VT6uytG8di-KNfJDCZE5Og</a></p>
+
+    
+  </div>
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/04/04/hexo-post/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'koudle';
+    
+    var disqus_url = 'http://yoursite.com/2017/04/11/yoga/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//koudle.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
