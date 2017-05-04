@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>喜欢你 | Koudle&#39;s</title>
+  <title>危险的匿名内部类系列之-----Runnable | Koudle&#39;s</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -15,21 +15,67 @@
     <meta name="keywords" content="Android,Java" />
   
 
-  <meta name="description" content="本来是抱着霸道总裁爱上你的预期去看的电影，结果意外的好看。当镜头定格在夕阳余光下的手拉手，原来成人世界的爱也可以这么唯美。金色的余光洒在身上，十指紧扣，相互依偎，也许这已经够了。
-当美食将两个毫无交际的处在不同平行世界的人联系在一起时，催化出了一些列奇妙的化学反映，一个刻薄挑剔、理性的让人有时感到非常讨厌的霸道总裁，最后却隔着一扇门吼出了“我根本没有办法选择喜不喜欢你“;而一个在不知名酒店工作、">
+  <meta name="description" content="分析
+
+
+
+优势
+危险
+
+
+
+
+匿名内部类（AnonymousInnerClass）
+简化代码
+匿名内部类本身会对外部类有一个引用（this引用）
+
+
+
+容易出问题的地方Runnable是我们常用的类，主要与handler配合使用，可以指定在主线程或子线程使用，也可以用于延迟任务。
+这里我们要警惕延迟任务，尤其是匿名内部类Runnable用在其他类的handler上的延迟任务，因为handler会">
 <meta property="og:type" content="article">
-<meta property="og:title" content="喜欢你">
-<meta property="og:url" content="http://yoursite.com/2017/04/30/loveyou/index.html">
+<meta property="og:title" content="危险的匿名内部类系列之-----Runnable">
+<meta property="og:url" content="http://yoursite.com/2017/05/04/AnonymousInnerClass/index.html">
 <meta property="og:site_name" content="Koudle's">
-<meta property="og:description" content="本来是抱着霸道总裁爱上你的预期去看的电影，结果意外的好看。当镜头定格在夕阳余光下的手拉手，原来成人世界的爱也可以这么唯美。金色的余光洒在身上，十指紧扣，相互依偎，也许这已经够了。
-当美食将两个毫无交际的处在不同平行世界的人联系在一起时，催化出了一些列奇妙的化学反映，一个刻薄挑剔、理性的让人有时感到非常讨厌的霸道总裁，最后却隔着一扇门吼出了“我根本没有办法选择喜不喜欢你“;而一个在不知名酒店工作、">
-<meta property="og:image" content="http://yoursite.com/2017/04/30/loveyou/loveyou.jpg">
-<meta property="og:updated_time" content="2017-04-30T04:31:21.058Z">
+<meta property="og:description" content="分析
+
+
+
+优势
+危险
+
+
+
+
+匿名内部类（AnonymousInnerClass）
+简化代码
+匿名内部类本身会对外部类有一个引用（this引用）
+
+
+
+容易出问题的地方Runnable是我们常用的类，主要与handler配合使用，可以指定在主线程或子线程使用，也可以用于延迟任务。
+这里我们要警惕延迟任务，尤其是匿名内部类Runnable用在其他类的handler上的延迟任务，因为handler会">
+<meta property="og:updated_time" content="2017-05-04T14:09:51.237Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="喜欢你">
-<meta name="twitter:description" content="本来是抱着霸道总裁爱上你的预期去看的电影，结果意外的好看。当镜头定格在夕阳余光下的手拉手，原来成人世界的爱也可以这么唯美。金色的余光洒在身上，十指紧扣，相互依偎，也许这已经够了。
-当美食将两个毫无交际的处在不同平行世界的人联系在一起时，催化出了一些列奇妙的化学反映，一个刻薄挑剔、理性的让人有时感到非常讨厌的霸道总裁，最后却隔着一扇门吼出了“我根本没有办法选择喜不喜欢你“;而一个在不知名酒店工作、">
-<meta name="twitter:image" content="http://yoursite.com/2017/04/30/loveyou/loveyou.jpg">
+<meta name="twitter:title" content="危险的匿名内部类系列之-----Runnable">
+<meta name="twitter:description" content="分析
+
+
+
+优势
+危险
+
+
+
+
+匿名内部类（AnonymousInnerClass）
+简化代码
+匿名内部类本身会对外部类有一个引用（this引用）
+
+
+
+容易出问题的地方Runnable是我们常用的类，主要与handler配合使用，可以指定在主线程或子线程使用，也可以用于延迟任务。
+这里我们要警惕延迟任务，尤其是匿名内部类Runnable用在其他类的handler上的延迟任务，因为handler会">
 
   
 
@@ -153,17 +199,22 @@
 </div>
 
 
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#分析"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容易出问题的地方"><span class="toc-text">容易出问题的地方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法"><span class="toc-text">解决方法</span></a></li></ol>
+  </div>
+
 
 
 <div class="content content-post CENTER">
-   <article id="post-loveyou" class="article article-type-post" itemprop="blogPost">
+   <article id="post-AnonymousInnerClass" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
-    <h1 class="post-title">喜欢你</h1>
+    <h1 class="post-title">危险的匿名内部类系列之-----Runnable</h1>
 
     <div class="article-meta">
       <span>
         <i class="icon-calendar"></i>
-        <span>2017.04.30</span>
+        <span>2017.05.04</span>
       </span>
 
       
@@ -179,7 +230,7 @@
       
         <span>
           <i class="icon-comment"></i>
-          <a href="https://koudle.github.io//2017/04/30/loveyou/#disqus_thread"></a>
+          <a href="https://koudle.github.io//2017/05/04/AnonymousInnerClass/#disqus_thread"></a>
         </span>
       
 
@@ -198,11 +249,25 @@
 
   <div class="article-content">
     
-      <img src="/2017/04/30/loveyou/loveyou.jpg" alt="loveyou" title="loveyou">
-<p>本来是抱着霸道总裁爱上你的预期去看的电影，结果意外的好看。当镜头定格在夕阳余光下的手拉手，原来成人世界的爱也可以这么唯美。金色的余光洒在身上，十指紧扣，相互依偎，也许这已经够了。</p>
-<p>当美食将两个毫无交际的处在不同平行世界的人联系在一起时，催化出了一些列奇妙的化学反映，一个刻薄挑剔、理性的让人有时感到非常讨厌的霸道总裁，最后却隔着一扇门吼出了“我根本没有办法选择喜不喜欢你“;而一个在不知名酒店工作、且并不受重视的默默无闻的厨师，突然遇到了可以相互欣赏的知己，但在得知有另外一个相同身份的人存在时又能因为自己的初心而果断选择离开，这种独立、向上、有自己坚持的个性的妹子，让女主成了我在电影中最喜欢的角色。</p>
-<p>当两个人无视路人异样的眼神，在上海的街道上尽情飞奔，再到夕阳下的上海老旧弄堂阳台上的两人，这种从最初的放飞自我到最后的流露于心，这应该是每个人都向往的吧。</p>
-<p>《我喜欢上你时的内心活动》《讨厌喜欢你》 《住在地球晒夕阳》这大概真的是爱上一个人时自己内心的变化吧。</p>
+      <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>优势</th>
+<th>危险</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>匿名内部类（AnonymousInnerClass）</td>
+<td>简化代码</td>
+<td>匿名内部类本身会对外部类有一个引用（this引用）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="容易出问题的地方"><a href="#容易出问题的地方" class="headerlink" title="容易出问题的地方"></a>容易出问题的地方</h3><p>Runnable是我们常用的类，主要与handler配合使用，可以指定在主线程或子线程使用，也可以用于延迟任务。</p>
+<p>这里我们要警惕延迟任务，尤其是匿名内部类Runnable用在其他类的handler上的延迟任务，因为handler会一直hold住我们的延迟的Runnable任务，而匿名内部类的Runnable含有对外部类的this引用，会导致内存泄漏</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>如果我们的应用里存在上面描述的常见，那么最好是一个类实现一个handler，当这个类销毁的时候，把对应的handler也销毁掉。</p>
 
     
   </div>
@@ -213,10 +278,10 @@
 
    
   <div class="box-prev-next clearfix">
-    <a class="show pull-left" href="/2017/04/29/xiaoshuang/">
+    <a class="show pull-left" href="/2017/04/30/loveyou/">
         <i class="icon icon-angle-left"></i>
     </a>
-    <a class="show pull-right" href="/2017/05/04/AnonymousInnerClass/">
+    <a class="hide pull-right" href="/">
         <i class="icon icon-angle-right"></i>
     </a>
   </div>
@@ -308,7 +373,7 @@
   <script>
     var disqus_shortname = 'koudle';
     
-    var disqus_url = 'http://yoursite.com/2017/04/30/loveyou/';
+    var disqus_url = 'http://yoursite.com/2017/05/04/AnonymousInnerClass/';
     
     (function(){
       var dsq = document.createElement('script');
