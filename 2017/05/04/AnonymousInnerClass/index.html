@@ -55,7 +55,7 @@
 
 容易出问题的地方Runnable是我们常用的类，主要与handler配合使用，可以指定在主线程或子线程使用，也可以用于延迟任务。
 这里我们要警惕延迟任务，尤其是匿名内部类Runnable用在其他类的handler上的延迟任务，因为handler会">
-<meta property="og:updated_time" content="2017-05-04T14:09:51.237Z">
+<meta property="og:updated_time" content="2017-05-04T14:13:21.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="危险的匿名内部类系列之-----Runnable">
 <meta name="twitter:description" content="分析
@@ -201,7 +201,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#分析"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容易出问题的地方"><span class="toc-text">容易出问题的地方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法"><span class="toc-text">解决方法</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#分析"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容易出问题的地方"><span class="toc-text">容易出问题的地方</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法"><span class="toc-text">解决方法</span></a></li></ol>
   </div>
 
 
@@ -249,7 +249,7 @@
 
   <div class="article-content">
     
-      <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><table>
+      <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><table>
 <thead>
 <tr>
 <th></th>
@@ -265,9 +265,9 @@
 </tr>
 </tbody>
 </table>
-<h3 id="容易出问题的地方"><a href="#容易出问题的地方" class="headerlink" title="容易出问题的地方"></a>容易出问题的地方</h3><p>Runnable是我们常用的类，主要与handler配合使用，可以指定在主线程或子线程使用，也可以用于延迟任务。</p>
+<h2 id="容易出问题的地方"><a href="#容易出问题的地方" class="headerlink" title="容易出问题的地方"></a>容易出问题的地方</h2><p>Runnable是我们常用的类，主要与handler配合使用，可以指定在主线程或子线程使用，也可以用于延迟任务。</p>
 <p>这里我们要警惕延迟任务，尤其是匿名内部类Runnable用在其他类的handler上的延迟任务，因为handler会一直hold住我们的延迟的Runnable任务，而匿名内部类的Runnable含有对外部类的this引用，会导致内存泄漏</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>如果我们的应用里存在上面描述的常见，那么最好是一个类实现一个handler，当这个类销毁的时候，把对应的handler也销毁掉。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>如果我们的应用里存在上面描述的常见，那么最好是一个类实现一个handler，当这个类销毁的时候，把对应的handler也销毁掉。</p>
 
     
   </div>
