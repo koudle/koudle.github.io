@@ -35,7 +35,7 @@
 编译好的包，在运行时经常报class not found的错误
 
 所以去调研了一些动态的编译方案，包括:Instant Run，">
-<meta property="og:updated_time" content="2017-05-26T01:36:16.490Z">
+<meta property="og:updated_time" content="2017-05-26T02:48:27.158Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Freeline 在NOW上的应用">
 <meta name="twitter:description" content="前言随着项目的发展，引入的库越来越多，而且模块划分的也越来越多，带来的明显改变就是编译越来越来慢，代码更改之后的验证特别痛苦，严重影响开发效率。
@@ -171,7 +171,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概览"><span class="toc-text">概览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Freeline简介"><span class="toc-text">Freeline简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Python环境安装"><span class="toc-text">Python环境安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gradle脚本改造"><span class="toc-text">Gradle脚本改造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android-Studio-上安装插件"><span class="toc-text">Android Studio 上安装插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行"><span class="toc-text">运行</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概览"><span class="toc-text">概览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Freeline简介"><span class="toc-text">Freeline简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优势"><span class="toc-text">优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#劣势"><span class="toc-text">劣势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Python环境安装"><span class="toc-text">Python环境安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gradle脚本改造"><span class="toc-text">Gradle脚本改造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android-Studio-上安装插件"><span class="toc-text">Android Studio 上安装插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行"><span class="toc-text">运行</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
   </div>
 
 
@@ -283,7 +283,17 @@
 </tr>
 </tbody>
 </table>
+<p>从上面的表格中，其实从支持的操作系统的角度来看，就只剩Freeline可以选择，因为Buck和OkBuck不支持Windows。</p>
 <h2 id="Freeline简介"><a href="#Freeline简介" class="headerlink" title="Freeline简介"></a>Freeline简介</h2><p>Freeline是蚂蚁金服旗下一站式理财平台蚂蚁聚宝团队在Android平台上的量身定做的一个基于动态替换的编译方案，稳定性方面：完善的基线对齐，进程级别异常隔离机制。性能方面：内部采用了类似Facebook的开源工具buck的多工程多任务并发思想, 并对代码及资源编译流程做了深入的性能优化。</p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ol>
+<li>兼容Gradle，因此我们的工程很容易引入Gradle，而且对我们的编译脚本是透明的，不会影响我们在RDM上的打包</li>
+<li>第一次全量编译和我们之前普通编译的用时是一样的，但不会感觉到卡顿</li>
+<li>之后的增量编译会很快，一般在20s左右，但当有修改AndroidManitest.xml、build.gradle、或超过20个Java文件有修改过的情况下，会自动切换到全量编译</li>
+</ol>
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><ol>
+<li>本地需要配置运行环境</li>
+<li>在使用过程中，发现虽然有Android Studio的插件，但插件并不是很智能，对是否该全量编译或者增量编译的情景判断不准确，例如：在手机上安装了RDM上的包，在用插件的时候，会自动启用增量编译，但手机上的包并没有启用Freeline,导致编译失败。所以，这里还需要自己手动使用命令行来编译。</li>
+</ol>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>这里主要针对Windows环境进行说明</p>
 <h4 id="Python环境安装"><a href="#Python环境安装" class="headerlink" title="Python环境安装"></a>Python环境安装</h4><p>打开cmd，依次输入下面的代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString(&apos;https://chocolatey.org/install.ps1&apos;))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;</div></pre></td></tr></table></figure>
@@ -298,7 +308,11 @@
 </blockquote>
 <h4 id="Android-Studio-上安装插件"><a href="#Android-Studio-上安装插件" class="headerlink" title="Android Studio 上安装插件"></a>Android Studio 上安装插件</h4><p><code>File → Settings... → Plugins → Browse repositories...</code></p>
 <p>搜 <code>Freeline</code> 安装</p>
-<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>点插件直接运行</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><ol>
+<li>点插件直接运行</li>
+<li>使用命令行<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python freeline.py -f //全量编译</div><div class="line">python freeline.py  //增量编译</div></pre></td></tr></table></figure>
+</li>
+</ol>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a href="https://github.com/alibaba/freeline/blob/master/README-zh.md" target="_blank" rel="external">https://github.com/alibaba/freeline/blob/master/README-zh.md</a></li>
 </ol>
