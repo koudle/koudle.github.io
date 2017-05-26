@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Freeline 在NOW上的应用 | Koudle&#39;s</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Freeline," />
+  
+
+  <meta name="description" content="前言随着项目的发展，引入的库越来越多，而且模块划分的也越来越多，带来的明显改变就是编译越来越来慢，代码更改之后的验证特别痛苦，严重影响开发效率。
+具体的表现如下
+
+编译太慢，一般需要3~4分钟
+编译时，Android Studio有明显的卡顿，甚至几乎不能进行其他的操作
+编译好的包，在运行时经常报class not found的错误
+
+所以去调研了一些动态的编译方案，包括:Instant Run，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Freeline 在NOW上的应用">
+<meta property="og:url" content="http://yoursite.com/2017/05/26/freeline/index.html">
+<meta property="og:site_name" content="Koudle's">
+<meta property="og:description" content="前言随着项目的发展，引入的库越来越多，而且模块划分的也越来越多，带来的明显改变就是编译越来越来慢，代码更改之后的验证特别痛苦，严重影响开发效率。
+具体的表现如下
+
+编译太慢，一般需要3~4分钟
+编译时，Android Studio有明显的卡顿，甚至几乎不能进行其他的操作
+编译好的包，在运行时经常报class not found的错误
+
+所以去调研了一些动态的编译方案，包括:Instant Run，">
+<meta property="og:updated_time" content="2017-05-26T01:36:16.490Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Freeline 在NOW上的应用">
+<meta name="twitter:description" content="前言随着项目的发展，引入的库越来越多，而且模块划分的也越来越多，带来的明显改变就是编译越来越来慢，代码更改之后的验证特别痛苦，严重影响开发效率。
+具体的表现如下
+
+编译太慢，一般需要3~4分钟
+编译时，Android Studio有明显的卡顿，甚至几乎不能进行其他的操作
+编译好的包，在运行时经常报class not found的错误
+
+所以去调研了一些动态的编译方案，包括:Instant Run，">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概览"><span class="toc-text">概览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Freeline简介"><span class="toc-text">Freeline简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Python环境安装"><span class="toc-text">Python环境安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gradle脚本改造"><span class="toc-text">Gradle脚本改造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android-Studio-上安装插件"><span class="toc-text">Android Studio 上安装插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行"><span class="toc-text">运行</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-freeline" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Freeline 在NOW上的应用</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.05.26</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Xiaoshuai Ren</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Freeline/">Freeline</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://koudle.github.io//2017/05/26/freeline/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>随着项目的发展，引入的库越来越多，而且模块划分的也越来越多，带来的明显改变就是编译越来越来慢，代码更改之后的验证特别痛苦，严重影响开发效率。</p>
+<p>具体的表现如下</p>
+<ol>
+<li>编译太慢，一般需要3~4分钟</li>
+<li>编译时，Android Studio有明显的卡顿，甚至几乎不能进行其他的操作</li>
+<li>编译好的包，在运行时经常报class not found的错误</li>
+</ol>
+<p>所以去调研了一些动态的编译方案，包括:Instant Run，Buck，OkBuck，Freeline。</p>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>支持操作系统</th>
+<th>Gradle兼容性</th>
+<th>编译速度</th>
+<th>上手难度</th>
+<th>问题</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Instant Run</td>
+<td>Mac/Linux/Windows</td>
+<td>兼容</td>
+<td>第一次全量编译慢，之后的增量编译较快</td>
+<td>容易</td>
+<td>因其代码增量是通过运行期hack method实现，所以进行了instant-run后，实际App没有重新走原有该走的生命周期，导致要看到类似onCreate，onResume等生命周期方法修改后的效果，必须手动重启一次进程，另外因为不同手机指令集合的不同，instant-run还会有一定挂掉的机会，最后，因为instant-run采用hack的方式，导致debug包调试时候无法看到对应的method堆栈，不得不说，这是个巨大的弊端，最后，instant-run不支持5.0以下的机器。</td>
+<td>x</td>
+</tr>
+<tr>
+<td>Buck</td>
+<td>Mac/Linux</td>
+<td>不兼容，需要用Buck重新写编译脚本</td>
+<td>第一次全量编译慢，之后的增量编译较快</td>
+<td>困难</td>
+<td>接入门槛高,不支持windows，不兼容Gradle</td>
+<td>x</td>
+</tr>
+<tr>
+<td>OkBuck</td>
+<td>Mac/Linux</td>
+<td>兼容</td>
+<td>第一次全量编译慢，之后的增量编译较快</td>
+<td>一般</td>
+<td>虽然能兼容Gradle，但不支持Windows</td>
+<td>x</td>
+</tr>
+<tr>
+<td>Freeline</td>
+<td>Mac/Linux/Window</td>
+<td>兼容</td>
+<td>第一次全量编译慢，之后的增量编译较快</td>
+<td>一般</td>
+<td>接入麻烦一点，需要配置环境</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Freeline简介"><a href="#Freeline简介" class="headerlink" title="Freeline简介"></a>Freeline简介</h2><p>Freeline是蚂蚁金服旗下一站式理财平台蚂蚁聚宝团队在Android平台上的量身定做的一个基于动态替换的编译方案，稳定性方面：完善的基线对齐，进程级别异常隔离机制。性能方面：内部采用了类似Facebook的开源工具buck的多工程多任务并发思想, 并对代码及资源编译流程做了深入的性能优化。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>这里主要针对Windows环境进行说明</p>
+<h4 id="Python环境安装"><a href="#Python环境安装" class="headerlink" title="Python环境安装"></a>Python环境安装</h4><p>打开cmd，依次输入下面的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString(&apos;https://chocolatey.org/install.ps1&apos;))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">choco install python2</div></pre></td></tr></table></figure>
+<h4 id="Gradle脚本改造"><a href="#Gradle脚本改造" class="headerlink" title="Gradle脚本改造"></a>Gradle脚本改造</h4><p>工程跟目录的 build.gradle 添加如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    repositories &#123;</div><div class="line">        jcenter()</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath &apos;com.antfortune.freeline:gradle:0.8.7&apos;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在Android application module 的 build.gradle 添加如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">apply plugin: &apos;com.antfortune.freeline&apos;</div><div class="line"></div><div class="line">freeline &#123;</div><div class="line">    hack true</div><div class="line">    productFlavor &apos;arm&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">android &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>最后在工程目录下，运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gradlew initFreeline -Pmirror</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意:这里可能会运行失败，提示下载文件错误，这时候可以直接下载所需的文件放在工程目录下即可</p>
+</blockquote>
+<h4 id="Android-Studio-上安装插件"><a href="#Android-Studio-上安装插件" class="headerlink" title="Android Studio 上安装插件"></a>Android Studio 上安装插件</h4><p><code>File → Settings... → Plugins → Browse repositories...</code></p>
+<p>搜 <code>Freeline</code> 安装</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>点插件直接运行</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://github.com/alibaba/freeline/blob/master/README-zh.md" target="_blank" rel="external">https://github.com/alibaba/freeline/blob/master/README-zh.md</a></li>
+</ol>
+
+    
+  </div>
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/05/21/memory-master/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'koudle';
+    
+    var disqus_url = 'http://yoursite.com/2017/05/26/freeline/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//koudle.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
